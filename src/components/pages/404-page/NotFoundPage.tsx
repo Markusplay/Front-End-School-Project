@@ -5,12 +5,14 @@ import styles from "./NotFoundPage.module.scss";
 
 const NotFoundPage = () => (
   <div className={styles["page-content"]}>
-    <h5 className={styles["not-found-text"]}>
+    <h3 className={styles["not-found-text"]}>
       Упс! 404 помилка. Сторінку не знайдено.
-    </h5>
+    </h3>
     <div className={styles.button}>
       <Link href={"/"}>
-        <Button variant="contained">Повернутися на головну</Button>
+        <div className="button">
+          <Button variant="outlined">Повернутися на головну</Button>
+        </div>
       </Link>
     </div>
   </div>

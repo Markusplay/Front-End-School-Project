@@ -24,6 +24,7 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off",
     "@typescript-eslint/no-empty-function": "off",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": [
