@@ -1,18 +1,18 @@
-import { Button } from "@mui/material";
-import Link from "next/link";
+import { Button } from '@mui/material';
+import Link from 'next/link';
 
-import styles from "./NotFoundPage.module.scss";
+import styles from './NotFoundPage.module.scss';
 
 const NotFoundPage = () => (
-  <div className={styles["page-content"]}>
-    <h3 className={styles["not-found-text"]}>
+  <div className={styles['page-content']}>
+    <h3 className={styles['not-found-text']}>
       Упс! 404 помилка. Сторінку не знайдено.
     </h3>
     <div className={styles.button}>
-      <Link href={"/"}>
-        <div className="button">
-          <Button variant="outlined">Повернутися на головну</Button>
-        </div>
+      <Link href={'/'} style={{ textDecoration: 'none' }}>
+        <Button className={styles.button} variant="contained">
+          Повернутися на головну
+        </Button>
       </Link>
     </div>
   </div>

@@ -1,87 +1,27 @@
-.page-layout {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .not-found-text {
-    width: 353px;
-    height: 62px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 128%;
-    text-align: center;
-    margin-top: 6%;
-    margin-bottom: 6%;
-  }
-  
-  .page-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .button{
-    display: flex;
-    align-self: center;
-    margin-top: 3%;
-    margin-bottom: 8%;
-    gap: 4%;
-  }
+/* NotFoundPage.module.scss */
 
-  // Tablet
-  @media screen and (max-width: 768px) {
-    .page-content{
-      flex-grow: 0;
-    }
-    .navbar{
-      height: 45px;
-    }
-    .button-desktop{
-      display: none;
-    }
-    .button{
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      margin-top: 3%;
-      margin-bottom: 6%;
-      gap: 16px;
-      button{
-        padding: 16px;
-      }
-    }
-    .not-found-text{
-      width: 226px;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 150%;
-      text-align: center;
-    }
-    .frog-image{
-      width: 60%;
-    }
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.not-found-text {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.button {
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .not-found-text {
+    font-size: 2rem;
   }
-  
-  // Mobile
-  @media screen and (max-width: 425px){
-    .not-found-text{
-      margin-top: 6%;
-    }
-    .button{
-      margin-top: 20%;
-    }
-    .frog-image{
-      width: 80%;
-    }
-    .page-layout{
-      background-image:
-              url("/assets/404-page/leaves_right_mobile.svg"),
-              url("/assets/404-page/clouds_mobile.svg");
-    }
-  }
+}
