@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
-import Head from "next/head";
-import Script from "next/script";
+import React, { ReactNode } from 'react';
+import Head from 'next/head';
+import Script from 'next/script';
 
-import styles from "./PageLayout.module.scss";
+import styles from './PageLayout.module.scss';
 
 interface PageLayoutProps {
   title?: string;
@@ -45,7 +45,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           <meta property="og:description" content={description} />
         )}
       </Head>
-      <div className={styles["page"] + " " + className}>{children}</div>
+      <div className={styles['page'] + ' ' + className}>{children}</div>
     </div>
   );
 };

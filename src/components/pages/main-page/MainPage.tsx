@@ -1,178 +1,73 @@
-import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { Pagination } from '@mui/material';
+import Link from 'next/link';
 
-import CourseCard from "@/components/common/ui/CourseCard/CourseCard";
+import CourseCard from '@/components/common/ui/CourseCard/CourseCard';
+import { useAppDispatch, useAppSelector } from '@/hooks/useSelector';
+import { fetchCourses } from '@/redux/courses/asyncActions';
+import { selectDetails } from '@/redux/courses/selectors';
 
-import styles from "./MainPage.module.scss";
+import styles from './MainPage.module.scss';
 
-const Main = () => {
+const MainPage = () => {
   const [pageNumber, setPageNumber] = useState(0);
-  const [courses, setCourses] = useState([
-    {
-      id: 0,
-      title: "",
-      url: "",
-      description: "",
-      image: "",
-      lessons: [],
-      skills: [],
-      rating: 0,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-    {
-      id: 1,
-      title: "1",
-      url: "1",
-      description: "1",
-      image: "1",
-      lessons: ["as", "as"],
-      skills: ["as", "as"],
-      rating: 1,
-      video: "",
-    },
-  ]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch("https://api.example.com/courses");
-  //     const data = await response.json();
-  //     setCourses(data);
-  //   };
-  //   fetchData();
-  // }, []);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchCourses());
+  }, [dispatch]);
+  const courses = useAppSelector(selectDetails);
   const coursesPerPage = 10;
   const pagesVisited = pageNumber * coursesPerPage;
   const pageCount = Math.ceil(courses?.length / coursesPerPage);
+
+  if (!courses) {
+    return <div>Loading</div>;
+  }
+
   const displayCourses = courses
     .slice(pagesVisited, pagesVisited + coursesPerPage)
-    .map((course) => (
-      <CourseCard
-        key={course?.id}
-        title={course?.title}
-        description={course?.description}
-        image={course?.image}
-        lessons={course?.lessons}
-        skills={course?.skills}
-        rating={course?.rating}
-        video={course?.video}
-      />
-    ));
-  const changePage = ({ selected }: { selected: number }) => {
-    setPageNumber(selected);
-  };
-  return (
-    <div className={styles["main-container"]}>
-      <h1
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+    .map((course, index) => (
+      <Link
+        href={`/preview-course/${course.id}`}
+        key={index}
+        className={styles.card}
       >
-        Explore Our Courses
-      </h1>
-      <div className={styles["courses-container"]}>{displayCourses}</div>
-      {/* <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"pagination"}
-        previousLinkClassName={"previous-page"}
-        nextLinkClassName={"next-page"}
-        disabledClassName={"pagination-disabled"}
-        activeClassName={"pagination-active"}
-      /> */}
+        <CourseCard
+          id={course.id}
+          key={course.id}
+          title={course.title}
+          description={course.description}
+          image={course.previewImageLink}
+          lessonsCount={course.lessonsCount}
+          slug={course.meta.slug}
+          skills={course.meta.skills}
+          rating={course.rating}
+          video={course.meta.courseVideoPreview?.link}
+          tags={course.tags}
+        />
+      </Link>
+    ));
+
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
+    setPageNumber(value - 1);
+  };
+
+  return (
+    <div className={styles.mainContainer}>
+      <div className={styles.coursesContainer}>{displayCourses}</div>
+      <div className={styles.paginate}>
+        <Pagination
+          count={pageCount}
+          page={pageNumber + 1}
+          onChange={handleChangePage}
+          color="primary"
+        />
+      </div>
     </div>
   );
 };
 
-export default Main;
+export default MainPage;

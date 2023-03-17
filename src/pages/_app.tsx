@@ -1,6 +1,15 @@
-import type { AppProps } from "next/app";
+import { Provider } from 'react-redux';
+import type { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 
-import "@/styles/globals.scss";
+import { store } from '@/redux/store';
+
+import '@/styles/globals.scss';
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <NextNProgress />
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
