@@ -18,7 +18,7 @@ const MainPage = () => {
     .slice()
     .sort(
       (a, b) =>
-        new Date(a.launchDate).valueOf() - new Date(b.launchDate).valueOf(),
+        new Date(b.launchDate).valueOf() - new Date(a.launchDate).valueOf(),
     );
   const coursesPerPage = 10;
   const pagesVisited = pageNumber * coursesPerPage;
@@ -28,9 +28,10 @@ const MainPage = () => {
     value: number,
   ) => {
     setPageNumber(value - 1);
+    window.scrollTo(0, 0);
   };
   if (!courses) {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 
   const displayCourses = courses
@@ -46,9 +47,8 @@ const MainPage = () => {
         slug={course.meta.slug}
         skills={course.meta.skills}
         rating={course.rating}
-        video={course.meta.courseVideoPreview?.link}
         tags={course.tags}
-        containsLockedLessons={false}
+        containsLockedLessons={course.containsLockedLessons}
         videoPreviewLink={course.meta.courseVideoPreview?.link}
         videoPreviewDuration={course.meta.courseVideoPreview?.duration}
         videoPreviewImageLink={course.meta.courseVideoPreview?.previewImageLink}

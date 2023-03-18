@@ -1,0 +1,31 @@
+.list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.video{
+  width: 450px;
+  height: 300px;
+}
+
+.button {
+  width: 450px;
+  min-width: 130px;
+  height: 40px;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-size: 120% auto;
+  &:hover {
+    background-position: right center;
+  }
+  &:hover {
+    top: 2px;
+  }
+}

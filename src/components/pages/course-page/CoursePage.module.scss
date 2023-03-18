@@ -1,0 +1,46 @@
+$black: #000000;
+$red: #bc0000;
+
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 40px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 700;
+    font-size: 36px;
+  }
+}
+
+.video-and-video-list {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  width: 100%;
+  justify-content: left;
+}
+.videosList {
+  outline: solid $black 1px;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 30px 12px;
+  width: fit-content;
+  height: fit-content;
+  p {
+    font-size: 24px;
+    padding-bottom: 12px;
+  }
+}
+.video {
+  display: block;
+}

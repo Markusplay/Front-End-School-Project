@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRef, useState } from 'react';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { Button } from '@mui/material';
 import Hls from 'hls.js';
 import Link from 'next/link';
@@ -17,11 +18,10 @@ interface CourseCardProps {
   containsLockedLessons: boolean;
   skills?: string[];
   rating: number;
-  video?: string;
   slug: string;
   videoPreviewLink: string;
-  videoPreviewDuration?: number;
-  videoPreviewImageLink?: string;
+  videoPreviewDuration: number;
+  videoPreviewImageLink: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -37,13 +37,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
   videoPreviewImageLink,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const router = useRouter();
+  const [isBroken, setIsBroken] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const poster =
+    videoPreviewLink || videoPreviewImageLink
+      ? `${videoPreviewImageLink}/cover.webp`
+      : './not-found.png';
   const handleMouseEnter = () => {
     setIsPlaying(true);
     const video = videoRef.current;
     if (video && videoPreviewImageLink) {
       const hls = new Hls();
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        setIsBroken(true);
+      });
       hls.loadSource(videoPreviewLink);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -63,17 +70,31 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <div>
       <div className={styles.courseCard}>
         <img src={`${image}/cover.webp`} className={styles.courseImg}></img>
-        <video
-          className={styles.courseVideo}
-          ref={videoRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          poster={videoPreviewImageLink + '/cover.webp'}
-          muted
-        />
+        {!isBroken ? (
+          <video
+            loop={true}
+            className={styles.courseVideo}
+            ref={videoRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            poster={poster}
+            muted
+          />
+        ) : (
+          <video
+            loop={true}
+            className={styles.courseVideo}
+            ref={videoRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            poster="./not-found.png"
+            muted
+          />
+        )}
+
         <div className={styles.courseInfo}>
           <div className={styles.title}>{title}</div>
-          <div>
+          <div className={styles.tags}>
             {tags.map((tag, index) => (
               <b className={styles.tag} key={index}>
                 {tag}
@@ -82,17 +103,19 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
           <div className={styles.description}>{description}</div>
           <div className={styles.lessons}>
-            Amount of Lessons: <strong>{lessonsCount}</strong>
+            <strong>{lessonsCount} lessons</strong>
           </div>
           {skills && (
-            <div className={styles.skills}>
-              Skills:
-              {skills?.map((skill, index) => (
-                <i className={styles.skill} key={index}>
-                  {skill}
-                </i>
-              ))}
-            </div>
+            <>
+              <p>Skills:</p>
+              <div className={styles.skills}>
+                {skills?.map((skill, index) => (
+                  <i className={styles.skill} key={index}>
+                    {skill}
+                  </i>
+                ))}
+              </div>
+            </>
           )}
         </div>
         <div className={styles.tagRating}>
@@ -100,7 +123,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <Button
               variant="contained"
               color="error"
-              style={{ width: '200px', marginTop: '20px' }}
+              style={{
+                width: 'calc(100% - 80px)',
+                marginTop: '20px',
+              }}
+              endIcon={<ArrowCircleRightIcon />}
             >
               Explore
             </Button>
