@@ -13,7 +13,6 @@ export type Course = {
   description: string;
   duration: number;
   lessonsCount: number;
-  containsLockedLessons: true;
   previewImageLink: string;
   rating: number;
   meta: {
@@ -21,10 +20,24 @@ export type Course = {
     fullCourseProductFamily?: string;
     slug: string;
     skills?: string[];
-    courseVideoPreview?: {
+    courseVideoPreview: {
       link: string;
       duration: number;
       previewImageLink: string;
     };
   };
+  lessons: [
+    {
+      id: string;
+      title: string;
+      duration: number;
+      order: number;
+      type: string;
+      status?: string;
+      link: string;
+      previewImageLink: string;
+      meta?: string;
+    },
+  ];
+  containsLockedLessons: boolean;
 };

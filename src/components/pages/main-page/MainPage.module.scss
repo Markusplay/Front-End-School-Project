@@ -14,10 +14,7 @@
 .card {
     display: flex;
     text-decoration: none;
-
-    &:visited{
-        color: black;
-    }
+    color: inherit;
 }
 
 .paginate{

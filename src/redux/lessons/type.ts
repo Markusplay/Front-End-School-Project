@@ -1,6 +1,6 @@
 import { Course, Status } from '../type';
 
-type Lesson = {
+export type Lesson = {
   id: string;
   title: string;
   duration: number;
@@ -9,7 +9,7 @@ type Lesson = {
   status: string;
   link: string;
   previewImageLink: string;
-  meta: null;
+  meta?: null;
 };
 
 export type Lessons = Course & { lessons: Lesson[] };
