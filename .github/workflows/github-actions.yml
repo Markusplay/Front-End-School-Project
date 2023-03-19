@@ -5,19 +5,10 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: npm install
+      - run: npm run build
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: install modules
-      run: npm install
-      - name: build project
-      run: npm run build
-      - name: lint code
-      run: npm run lint
-      - name: next nuild
-      run: next run lint
-      - name: dev
-        run: next dev
-      - name: build
-        run: next build
-      - name: start
-        run: next start
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
