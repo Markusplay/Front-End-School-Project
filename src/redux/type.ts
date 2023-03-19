@@ -15,6 +15,7 @@ export type Course = {
   lessonsCount: number;
   previewImageLink: string;
   rating: number;
+  containsLockedLessons: boolean;
   meta: {
     fullCourseProductId?: string;
     fullCourseProductFamily?: string;
@@ -26,18 +27,4 @@ export type Course = {
       previewImageLink: string;
     };
   };
-  lessons: [
-    {
-      id: string;
-      title: string;
-      duration: number;
-      order: number;
-      type: string;
-      status?: string;
-      link: string;
-      previewImageLink: string;
-      meta?: string;
-    },
-  ];
-  containsLockedLessons: boolean;
 };

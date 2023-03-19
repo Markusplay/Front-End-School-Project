@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import Hls from 'hls.js';
 import { useRouter } from 'next/router';
 
 import ListLessons from '@/components/common/ui/ListLessons';
-import { useAppDispatch, useAppSelector } from '@/hooks/useSelector';
+import { useAppDispatch, useAppSelector } from '@/hooks/useSelect';
 import { fetchLessons } from '@/redux/lessons/asyncActions';
 import { selectDetails } from '@/redux/lessons/selectors';
 
@@ -22,15 +23,39 @@ const CoursePage = () => {
     );
   }, [courseId, dispatch]);
   const lessons = useAppSelector(selectDetails);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const video = videoRef.current;
   let sortedLessons;
   if (lessons) {
     sortedLessons = lessons.lessons.slice().sort((a, b) => a.order - b.order);
   }
-  const poster = sortedLessons?.[currentLesson].previewImageLink
-    ? `${sortedLessons?.[currentLesson].previewImageLink}/lesson-${sortedLessons?.[currentLesson].order}.webp`
+  const poster = sortedLessons?.[currentLesson]?.previewImageLink
+    ? `${sortedLessons?.[currentLesson]?.previewImageLink}/lesson-${sortedLessons?.[currentLesson]?.order}.webp`
     : './not-found.png';
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const video = videoRef.current;
+  useEffect(() => {
+    const handleKeyDown = (event: {
+      key: string;
+      preventDefault: () => void;
+    }) => {
+      if (event.key === '1' && videoRef.current?.playbackRate) {
+        event.preventDefault();
+        if (videoRef.current.playbackRate < 2) {
+          videoRef.current.playbackRate += 0.1;
+        }
+      } else if (event.key === '0' && videoRef.current?.playbackRate) {
+        event.preventDefault();
+        if (videoRef.current.playbackRate > 0.5) {
+          videoRef.current.playbackRate -= 0.1;
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
   if (video && sortedLessons?.[currentLesson].previewImageLink) {
     const hls = new Hls();
     if (!sortedLessons?.[currentLesson].link) {
@@ -40,26 +65,44 @@ const CoursePage = () => {
     hls.loadSource(sortedLessons?.[currentLesson].link || '');
     hls.attachMedia(video);
   }
+
   return (
     <div className={styles.page}>
-      <div className={styles.heading}>
+      <div className={styles.title}>
         <p>{lessons?.title}</p>
       </div>
-      <div className={styles['video-and-video-list']}>
+      <div className={styles.videoList}>
         <div className={styles.video}>
-          <p>{sortedLessons?.[currentLesson].title}</p>
+          <h3 className={styles.subTitle}>
+            Lesson: {sortedLessons?.[currentLesson]?.title}
+          </h3>
           <video
-            style={{ width: '1066.66px', height: '600px' }}
+            style={{ width: '100%', height: 'fit-content' }}
             controls={true}
             poster={poster}
             ref={videoRef}
           ></video>
+          <div className={styles.courseInfo}>
+            <div>
+              <h6>*To speed up the video, press 1</h6>
+              <h6>*To slow down the video, press 0</h6>
+            </div>
+            <div>
+              <h6 className={styles.date}>
+                <CalendarTodayIcon />
+                Launch date:
+                {lessons?.launchDate
+                  ? new Date(lessons?.launchDate).toLocaleDateString('en-GB')
+                  : 'No date available'}{' '}
+              </h6>
+            </div>
+          </div>
         </div>
         <div className={styles.videosList}>
+          <h4 style={{ marginBottom: '30px' }}>Lessons:</h4>
           {sortedLessons?.map((lesson, index) => (
             <ListLessons
               duration={lesson.duration}
-              currentLesson={currentLesson}
               setCurrentLesson={setCurrentLesson}
               order={lesson.order}
               key={index}

@@ -1,7 +1,6 @@
 .courseCard {
   width: 400px;
-  min-height: 955px;
-  max-height: fit-content;
+  height: 955px;
   background-color: ghostwhite;
   flex-direction: column;
   border-radius: 20px;
@@ -35,6 +34,10 @@
   border-left: 8px solid orangered;
   
 }
+.time{
+  display: flex;
+  gap:10px;
+}
 .title {
   display: flex;
   justify-content: center;
@@ -63,10 +66,12 @@
   margin-top: 10px;
   font-size: 25px;
 }
-.lessons {
+.lessonsTime {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
   font-size: large;
   margin-top: 20px;
-  margin-bottom: 10px;
   color: brown;
 }
 .skills {
@@ -77,6 +82,7 @@
   height: 132px;
   overflow: auto;
   scrollbar-width: thin;
+  margin-left: 15px;
 }
 
 .tags {
@@ -89,6 +95,7 @@
 .tag {
   display: flex;
   align-items: center;
+  margin-top: 5px;
   background-color: orange;
   height: 30px;
   border-radius: 100px;
@@ -109,24 +116,11 @@
   bottom: 0;
   margin-bottom: 10px;
 }
-#my-video {
-  /* set a fixed width and height for the video player */
-  width: 640px;
-  height: 360px;
-  /* apply a loading spinner animation */
-  background-image: url('/loading-spinner.gif');
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
-/* hide the loading spinner once the video has finished loading */
-#my-video:not(:checked) {
-  background-image: none;
-}
 @media (max-width: 480px) {
   .courseCard {
     width: fit-content;
-    height: 700px;
+    height: 920px;
     border-radius: 20px;
     position: relative;
   }

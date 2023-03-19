@@ -23,3 +23,4 @@ export interface LessonsSliceState {
 export interface FetchLessonsParams {
   id: string;
 }
+export { Status };

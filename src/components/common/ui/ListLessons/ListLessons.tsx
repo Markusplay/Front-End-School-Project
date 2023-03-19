@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import ArrowCircleUpOutlinedIcon from '@mui/icons-material/ArrowCircleUpOutlined';
+import BlockIcon from '@mui/icons-material/Block';
 import { Button } from '@mui/material';
-import { useRouter } from 'next/router';
 
 import styles from './ListLessons.module.scss';
 
@@ -9,7 +10,6 @@ export interface ListLessonsProps {
   title: string;
   previewImageLink: string;
   setCurrentLesson: React.Dispatch<React.SetStateAction<number>>;
-  currentLesson: number;
   disabled: boolean;
   order: number;
   duration: number;
@@ -17,7 +17,6 @@ export interface ListLessonsProps {
 
 const ListLessons: React.FC<ListLessonsProps> = ({
   duration,
-  currentLesson,
   setCurrentLesson,
   title = 'video',
   disabled,
@@ -28,25 +27,61 @@ const ListLessons: React.FC<ListLessonsProps> = ({
   const seconds = duration - minutes * 60;
   return (
     <div className={styles.list}>
-      <div>
-        {minutes}:{seconds}
-      </div>
-      {!disabled && (
-        <video
-          className={styles.video}
-          poster={previewImageLink ? previewImageLink : './not-found.png'}
-        ></video>
+      {disabled ? (
+        <>
+          <Button
+            className={styles.button}
+            disabled={disabled}
+            endIcon={
+              <BlockIcon
+                style={{ width: '24px', height: '24px', marginBottom: '10px' }}
+              />
+            }
+            onClick={() => {
+              setCurrentLesson(order - 1);
+              window.scrollTo(0, 0);
+            }}
+          >
+            <p className={styles.title}>{title}</p>
+          </Button>
+        </>
+      ) : (
+        <div className={styles.item}>
+          <video
+            className={styles.video}
+            style={{ width: '100%', height: 'fit-content' }}
+            poster={previewImageLink ? previewImageLink : './not-found.png'}
+          />
+          <div className={styles.time}>
+            <AccessTimeFilledIcon />
+            {minutes}m {seconds}s
+          </div>
+          <Button
+            color="error"
+            variant="contained"
+            className={styles.button}
+            style={{
+              fontWeight: 'bold',
+              borderRadius: '5px',
+              marginTop: '15px',
+              width: '100%',
+              height: 'fit-content',
+            }}
+            disabled={disabled}
+            endIcon={
+              <ArrowCircleUpOutlinedIcon
+                style={{ width: '24px', height: '24px' }}
+              />
+            }
+            onClick={() => {
+              setCurrentLesson(order - 1);
+              window.scrollTo(0, 0);
+            }}
+          >
+            <p className={styles.title}>{title}</p>
+          </Button>
+        </div>
       )}
-      <Button
-        className={styles.button}
-        disabled={disabled}
-        onClick={() => {
-          setCurrentLesson(order - 1);
-          window.scrollTo(0, 0);
-        }}
-      >
-        <p className={styles.title}>{title}</p>
-      </Button>
     </div>
   );
 };

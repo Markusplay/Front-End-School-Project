@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
 
 import CourseCard from '@/components/common/ui/CourseCard/CourseCard';
-import { useAppDispatch, useAppSelector } from '@/hooks/useSelector';
+import { useAppDispatch, useAppSelector } from '@/hooks/useSelect';
 import { fetchCourses } from '@/redux/courses/asyncActions';
 import { selectDetails } from '@/redux/courses/selectors';
 
@@ -30,10 +30,6 @@ const MainPage = () => {
     setPageNumber(value - 1);
     window.scrollTo(0, 0);
   };
-  if (!courses) {
-    return <div>Loading...</div>;
-  }
-
   const displayCourses = courses
     .slice(pagesVisited, pagesVisited + coursesPerPage)
     .map(course => (
@@ -42,6 +38,7 @@ const MainPage = () => {
         key={course.id}
         title={course.title}
         description={course.description}
+        duration={course.duration}
         image={course.previewImageLink}
         lessonsCount={course.lessonsCount}
         slug={course.meta.slug}
@@ -62,7 +59,7 @@ const MainPage = () => {
           count={pageCount}
           page={pageNumber + 1}
           onChange={handleChangePage}
-          color="primary"
+          color="secondary"
         />
       </div>
     </div>
