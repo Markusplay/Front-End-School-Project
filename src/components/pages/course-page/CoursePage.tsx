@@ -14,6 +14,10 @@ const CoursePage = () => {
   const router = useRouter();
   const [currentLesson, setCurrentLesson] = useState(0);
   const courseId = router.query.courseId as string;
+  const lessons = useAppSelector(selectDetails);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const video = videoRef.current;
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(
@@ -22,9 +26,7 @@ const CoursePage = () => {
       }),
     );
   }, [courseId, dispatch]);
-  const lessons = useAppSelector(selectDetails);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const video = videoRef.current;
+
   let sortedLessons;
   if (lessons) {
     sortedLessons = lessons.lessons.slice().sort((a, b) => a.order - b.order);
@@ -37,15 +39,15 @@ const CoursePage = () => {
       key: string;
       preventDefault: () => void;
     }) => {
-      if (event.key === '1' && videoRef.current?.playbackRate) {
+      if (event.key === '1' && video?.playbackRate) {
         event.preventDefault();
-        if (videoRef.current.playbackRate < 2) {
-          videoRef.current.playbackRate += 0.1;
+        if (video?.playbackRate < 2) {
+          video.playbackRate += 0.1;
         }
-      } else if (event.key === '0' && videoRef.current?.playbackRate) {
+      } else if (event.key === '0' && video?.playbackRate) {
         event.preventDefault();
-        if (videoRef.current.playbackRate > 0.5) {
-          videoRef.current.playbackRate -= 0.1;
+        if (video?.playbackRate > 0.5) {
+          video.playbackRate -= 0.1;
         }
       }
     };
@@ -65,11 +67,10 @@ const CoursePage = () => {
     hls.loadSource(sortedLessons?.[currentLesson].link || '');
     hls.attachMedia(video);
   }
+
   return (
     <div className={styles.page}>
-      <div className={styles.title}>
-        <p>{lessons?.title}</p>
-      </div>
+      <p className={styles.title}>{lessons?.title}</p>
       <div className={styles.videoList}>
         <div className={styles.video}>
           <h3 className={styles.subTitle}>
@@ -92,7 +93,7 @@ const CoursePage = () => {
                 Launch date:
                 {lessons?.launchDate
                   ? new Date(lessons?.launchDate).toLocaleDateString('en-GB')
-                  : 'No date available'}{' '}
+                  : 'No date available'}
               </h6>
             </div>
           </div>

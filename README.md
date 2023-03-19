@@ -25,6 +25,7 @@ This is the pet project for Genesis Front-End School 2.0.
 * [Next.js](https://nextjs.org)
 * [SASS](https://github.com/sass/sass)
 * [MUI](https://mui.com)
+* [Redux](https://redux.js.org)
 ## Getting started
 
 To get a local copy up and running follow these steps.

@@ -10,7 +10,7 @@ const NotFoundPage = () => (
     </h3>
     <div className={styles.button}>
       <Link href={'/'} style={{ textDecoration: 'none' }}>
-        <Button size="large" className={styles.button} variant="contained">
+        <Button className={styles.button} size="large" variant="contained">
           Повернутися на головну
         </Button>
       </Link>

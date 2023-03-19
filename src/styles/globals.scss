@@ -12,7 +12,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: 'Manrope', sans-serif;
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 h1 {
@@ -51,28 +51,22 @@ h6 {
   font-weight: 400;
 }
 
-.body-primary{
+.body-primary,
+label {
   font-size: 14px;
   line-height: 1.4;
   font-weight: 400;
 }
 
-.body-secondary{
+.body-secondary,
+input {
   font-size: 16px;
   line-height: 1.22;
   font-weight: 400;
 }
 
-.overline-text{
+.overline-text {
   font-size: 11px;
   line-height: 1.6;
   font-weight: 400;
-}
-
-label{
-  @extend .body-primary;
-}
-
-input{
-  @extend .body-secondary;
 }

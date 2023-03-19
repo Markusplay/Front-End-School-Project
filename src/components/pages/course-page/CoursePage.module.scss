@@ -6,6 +6,7 @@
   min-height: 100vh;
   padding: 50px 40px;
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -13,21 +14,26 @@
   background-color: orange;
   border-radius: 200px;
   justify-content: center;
+  font-size: 32px;
+  
   p {
     font-weight: 700;
     font-size: 36px;
   }
 }
-.myVideo{
+
+.myVideo {
   width: 1066.66px;
   height: 600px;
 }
+
 @media (max-width: 1125px) {
-  .myVideo{
+  .myVideo {
     width: 100%;
     height: fit-content;
   }
 }
+
 .videoList {
   display: flex;
   flex-direction: row;
@@ -35,6 +41,7 @@
   gap: 25px;
   width: 100%;
 }
+
 .videosList {
   border-radius: 10px;
   justify-content: center;
@@ -47,21 +54,25 @@
     font-size: 20px;
   }
 }
+
 .video {
   display: block;
 }
-.date{
+
+.date {
   width: fit-content;
   display: flex;
   border: 2px solid red;
   border-radius: 10px;
   padding: 10px;
 }
-.content{
+
+.content {
   margin-bottom: 30px;
   margin-top: 20px;
 }
-.courseInfo{
+
+.courseInfo {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -69,7 +80,8 @@
   height: fit-content;
   margin-top: 20px;
 }
-.subTitle{
+
+.subTitle {
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -84,11 +96,13 @@
     min-height: 100vh;
     padding: 50px 40px;
   }
+
   .video {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
+
   .videoList {
     display: flex;
     flex-direction: row;
@@ -96,6 +110,7 @@
     gap: 25px;
     width: 100%;
   }
+
   .videoList {
     display: flex;
     flex-direction: column;
@@ -103,6 +118,7 @@
     gap: 25px;
     width: 100%;
   }
+
   .videosList {
     border-radius: 10px;
     justify-content: center;
@@ -111,13 +127,14 @@
     flex-direction: column;
     width: fit-content;
     height: fit-content;
+
     p {
       font-size: 20px;
     }
   }
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .title {
     display: flex;
     align-items: center;
@@ -126,13 +143,14 @@
     border-radius: 200px;
     justify-content: center;
     padding-left: 20px;
+
     p {
       font-weight: 700;
       font-size: 28px;
     }
   }
 }
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .title {
     display: flex;
     align-items: center;
@@ -141,6 +159,7 @@
     border-radius: 200px;
     justify-content: center;
     padding: 20px;
+
     p {
       font-weight: 700;
       font-size: 20px;
