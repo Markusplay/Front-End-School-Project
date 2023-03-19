@@ -1,11 +1,11 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: GitHub Actions
+run-name: GitHub Actions Test
 on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: npm run build
+      - run: npm run lint
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: List files in the repository
