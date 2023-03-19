@@ -40,7 +40,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   videoPreviewLink,
   videoPreviewImageLink,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [isBroken, setIsBroken] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const poster =
@@ -48,7 +48,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       ? `${videoPreviewImageLink}/cover.webp`
       : './not-found.png';
   const handleMouseEnter = () => {
-    setIsPlaying(true);
+    // setIsPlaying(true);
     const video = videoRef.current;
     if (video && videoPreviewImageLink) {
       const hls = new Hls();
@@ -65,7 +65,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;
   const handleMouseLeave = () => {
-    setIsPlaying(false);
+    // setIsPlaying(false);
     const video = videoRef.current;
     if (video) {
       video.pause();
