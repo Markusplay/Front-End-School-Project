@@ -52,7 +52,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     const video = videoRef.current;
     if (video && videoPreviewImageLink) {
       const hls = new Hls();
-      hls.on(Hls.Events.ERROR, function (event, data) {
+      hls.on(Hls.Events.ERROR, function () {
         setIsBroken(true);
       });
       hls.loadSource(videoPreviewLink);
