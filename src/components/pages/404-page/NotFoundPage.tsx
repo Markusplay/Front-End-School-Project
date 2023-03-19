@@ -4,8 +4,8 @@ import Link from 'next/link';
 import styles from './NotFoundPage.module.scss';
 
 const NotFoundPage = () => (
-  <div className={styles['page-content']}>
-    <h3 className={styles['not-found-text']}>
+  <div className={styles.pageContent}>
+    <h3 className={styles.notFoundText}>
       Упс! 404 помилка. Сторінку не знайдено.
     </h3>
     <div className={styles.button}>

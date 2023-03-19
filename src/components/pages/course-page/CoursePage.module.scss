@@ -10,13 +10,24 @@
   display: flex;
   align-items: center;
   width: 100%;
+  background-color: orange;
+  border-radius: 200px;
   justify-content: center;
   p {
     font-weight: 700;
     font-size: 36px;
   }
 }
-
+.myVideo{
+  width: 1066.66px;
+  height: 600px;
+}
+@media (max-width: 1125px) {
+  .myVideo{
+    width: 100%;
+    height: fit-content;
+  }
+}
 .videoList {
   display: flex;
   flex-direction: row;
@@ -40,19 +51,20 @@
   display: block;
 }
 .date{
+  width: fit-content;
   display: flex;
-  position: absolute;
   border: 2px solid red;
   border-radius: 10px;
   padding: 10px;
-  top:0;
-  right: 0;
+}
+.content{
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
 .courseInfo{
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
-  position: relative;
+  flex-direction: row;
   width: 100%;
   height: fit-content;
   margin-top: 20px;
@@ -100,6 +112,37 @@
     width: fit-content;
     height: fit-content;
     p {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width:1000px) {
+  .title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: orange;
+    border-radius: 200px;
+    justify-content: center;
+    padding-left: 20px;
+    p {
+      font-weight: 700;
+      font-size: 28px;
+    }
+  }
+}
+@media (max-width:480px) {
+  .title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: orange;
+    border-radius: 200px;
+    justify-content: center;
+    padding: 20px;
+    p {
+      font-weight: 700;
       font-size: 20px;
     }
   }

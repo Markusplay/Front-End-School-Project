@@ -1,6 +1,4 @@
-/* NotFoundPage.module.scss */
-
-.page-content {
+.pageContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,19 +7,19 @@
   background-color: #f7f7f7;
 }
 
-.not-found-text {
-  font-size: 3rem;
+.notFoundText {
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 
 .button {
-  margin-top: 2rem;
+  margin-top: 32px;
 }
 
 @media only screen and (max-width: 768px) {
-  .not-found-text {
-    font-size: 2rem;
+  .notFoundText {
+    font-size: 32px;
   }
 }

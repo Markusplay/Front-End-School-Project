@@ -56,15 +56,15 @@ const CoursePage = () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
   if (video && sortedLessons?.[currentLesson].previewImageLink) {
     const hls = new Hls();
     if (!sortedLessons?.[currentLesson].link) {
-      return <>{router.push('/404')}</>;
+      router.push('/404');
     }
     hls.loadSource(sortedLessons?.[currentLesson].link || '');
     hls.attachMedia(video);
   }
-
   return (
     <div className={styles.page}>
       <div className={styles.title}>
@@ -76,7 +76,7 @@ const CoursePage = () => {
             Lesson: {sortedLessons?.[currentLesson]?.title}
           </h3>
           <video
-            style={{ width: '100%', height: 'fit-content' }}
+            className={styles.myVideo}
             controls={true}
             poster={poster}
             ref={videoRef}
@@ -98,7 +98,7 @@ const CoursePage = () => {
           </div>
         </div>
         <div className={styles.videosList}>
-          <h4 style={{ marginBottom: '30px' }}>Lessons:</h4>
+          <h4 className={styles.content}>Lessons:</h4>
           {sortedLessons?.map((lesson, index) => (
             <ListLessons
               duration={lesson.duration}

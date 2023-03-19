@@ -59,7 +59,8 @@ const MainPage = () => {
           count={pageCount}
           page={pageNumber + 1}
           onChange={handleChangePage}
-          color="secondary"
+          size="large"
+          color="primary"
         />
       </div>
     </div>
