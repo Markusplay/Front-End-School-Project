@@ -59,8 +59,7 @@ const CoursePage = () => {
   if (video && sortedLessons?.[currentLesson].previewImageLink) {
     const hls = new Hls();
     if (!sortedLessons?.[currentLesson].link) {
-      router.push('/404');
-      return;
+      return <>{router.push('/404')}</>;
     }
     hls.loadSource(sortedLessons?.[currentLesson].link || '');
     hls.attachMedia(video);
